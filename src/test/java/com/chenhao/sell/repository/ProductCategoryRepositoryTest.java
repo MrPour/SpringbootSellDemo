@@ -1,12 +1,16 @@
 package com.chenhao.sell.repository;
 
 import com.chenhao.sell.dataObject.ProductCategory;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
@@ -20,15 +24,16 @@ public class ProductCategoryRepositoryTest
     public void findOneCategory()
     {
         Optional<ProductCategory> c = repository.findById(1);
-        System.out.println(c.get());
+        System.out.println(c.get().getCategoryId());
     }
 
     @Test
+    @Transactional //测试里使用事务注解，在执行完毕后会自动回滚
     public void saveCategory()
     {
         ProductCategory productCategory = new ProductCategory();
-        productCategory.setCategoryName("衣服");
-        productCategory.setCategoryType(2);
+        productCategory.setCategoryName("汽车");
+        productCategory.setCategoryType(5);
         repository.save(productCategory);
     }
 
@@ -39,5 +44,13 @@ public class ProductCategoryRepositoryTest
         ProductCategory productCategory = category.get();
         productCategory.setCategoryType(100);
         repository.save(productCategory);
+    }
+
+    @Test
+    public void findByCategoryTypeInTest()
+    {
+        List<Integer> list = Arrays.asList(3,100);
+        List<ProductCategory> result = repository.findByCategoryTypeIn(list);
+        Assert.assertNotNull(result);
     }
 }
