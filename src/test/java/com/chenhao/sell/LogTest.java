@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@Sl4j 使用lombok可以省略成员变量的创建
 public class LogTest {
 
     //针对当前类的日志
@@ -26,6 +25,5 @@ public class LogTest {
         //使用{}作为占位符
         logger.info("name:{},password:{}",name,password);
         logger.error("error..");
-
     }
 }

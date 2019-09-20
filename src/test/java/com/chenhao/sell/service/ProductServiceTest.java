@@ -1,7 +1,7 @@
 package com.chenhao.sell.service;
 
 import com.chenhao.sell.dataObject.ProductInfo;
-import com.chenhao.sell.enums.ProductEnumStatus;
+import com.chenhao.sell.enums.ProductStatusEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,7 +54,7 @@ public class ProductServiceTest {
         productInfo.setProductName("火锅");
         productInfo.setProductPrice(new BigDecimal(125.00));
         productInfo.setProductStock(10);
-        productInfo.setProductStatus(ProductEnumStatus.DOWN.getCode());
+        productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
         productInfo.setProductIcon("http://baidu.com");
 
         ProductInfo info = service.save(productInfo);

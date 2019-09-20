@@ -1,7 +1,7 @@
 package com.chenhao.sell.service;
 
 import com.chenhao.sell.dataObject.ProductInfo;
-import com.chenhao.sell.enums.ProductEnumStatus;
+import com.chenhao.sell.enums.ProductStatusEnum;
 import com.chenhao.sell.repository.ProductInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +25,7 @@ public class ProductService implements IProductService
     @Override
     public List<ProductInfo> findUpAll()
     {
-        return repository.findByProductStatus(ProductEnumStatus.UP.getCode());
+        return repository.findByProductStatus(ProductStatusEnum.UP.getCode());
     }
 
     @Override
