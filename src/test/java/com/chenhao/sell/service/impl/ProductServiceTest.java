@@ -1,7 +1,8 @@
-package com.chenhao.sell.service;
+package com.chenhao.sell.service.impl;
 
 import com.chenhao.sell.dataObject.ProductInfo;
 import com.chenhao.sell.enums.ProductStatusEnum;
+import com.chenhao.sell.service.impl.ProductService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,8 @@
-package com.chenhao.sell.service;
+package com.chenhao.sell.service.impl;
 
 import com.chenhao.sell.dataObject.ProductCategory;
 import com.chenhao.sell.repository.ProductCategoryRepository;
+import com.chenhao.sell.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.List;
 * @date 2019/9/17
 */
 @Service
-public class CategoryService implements  ICategoryService
+public class CategoryService implements ICategoryService
 {
     @Autowired
     private ProductCategoryRepository repository;

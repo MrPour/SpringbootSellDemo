@@ -1,5 +1,6 @@
-package com.chenhao.sell.service;
+package com.chenhao.sell.service.impl;
 import com.chenhao.sell.dataObject.ProductCategory;
+import com.chenhao.sell.service.impl.CategoryService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,7 @@
 package com.chenhao.sell.service;
 
 import com.chenhao.sell.dataObject.ProductInfo;
+import com.chenhao.sell.dto.CartDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -8,17 +9,22 @@ import java.util.List;
 
 public interface IProductService
 {
-    public ProductInfo findById(String id);
+    /**根据id查询商品*/
+    ProductInfo findById(String id);
 
     /**查找所有上架商品信息*/
-    public List<ProductInfo> findUpAll();
+    List<ProductInfo> findUpAll();
 
     /**分页查询所有商品信息*/
-    //这里返回的是page对象,而不是list
-    public Page<ProductInfo> findAll(Pageable pageable);
+    Page<ProductInfo> findAll(Pageable pageable);
 
-    public ProductInfo save(ProductInfo productInfo);
+    /**新增商品信息*/
+    ProductInfo save(ProductInfo productInfo);
 
-    /**加库存*/
-    /**减库存*/
+    /**为一批商品加库存*/
+    //按订单去批量加减效率更高
+    void increaseStock(List<CartDTO> cartDTOList);
+
+    /**为一批商品减库存*/
+    void decreaseStock(List<CartDTO> cartDTOList);
 }

@@ -11,7 +11,8 @@ public enum ProductStatusEnum
     private Integer code;
     private String status;
 
-    ProductStatusEnum(Integer code, String status) {
+    ProductStatusEnum(Integer code, String status)
+    {
         this.code = code;
         this.status = status;
     }

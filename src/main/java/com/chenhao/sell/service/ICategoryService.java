@@ -7,12 +7,12 @@ import java.util.List;
 public interface ICategoryService
 {
     //卖家端
-    public ProductCategory findById(Integer categoryId);
+    ProductCategory findById(Integer categoryId);
 
-    public List<ProductCategory> findAll();
+    List<ProductCategory> findAll();
 
-    public ProductCategory save(ProductCategory category);
+    ProductCategory save(ProductCategory category);
 
     //买家端
-    public List<ProductCategory> findByCategoryTypeIn (List<Integer> categoryTypes);
+    List<ProductCategory> findByCategoryTypeIn (List<Integer> categoryTypes);
 }

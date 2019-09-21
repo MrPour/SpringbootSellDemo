@@ -3,8 +3,8 @@ package com.chenhao.sell.controller;
 import com.chenhao.sell.Utils.ResultVOUtil;
 import com.chenhao.sell.dataObject.ProductCategory;
 import com.chenhao.sell.dataObject.ProductInfo;
-import com.chenhao.sell.repository.ProductCategoryRepository;
-import com.chenhao.sell.service.ProductService;
+import com.chenhao.sell.service.impl.CategoryService;
+import com.chenhao.sell.service.impl.ProductService;
 import com.chenhao.sell.vo.ProductInfoVO;
 import com.chenhao.sell.vo.ProductVO;
 import com.chenhao.sell.vo.ResultVO;
@@ -26,18 +26,19 @@ public class BuyerProductController
     @Autowired
     private ProductService productService;
     @Autowired
-    private ProductCategoryRepository productCategoryRepository;
+    private CategoryService categoryService;
 
     @GetMapping("/list")
     public ResultVO findUpAll()
     {
+        /**这里是一次性查出，而不是单独按照type去查找，效率更高*/
         List<ProductInfo> productInfos = productService.findUpAll();
 
         List<Integer> collect = productInfos.stream()
                 .map(a -> a.getCategoryType())
                 .collect(toList());
 
-        List<ProductCategory> productCategories = productCategoryRepository.findByCategoryTypeIn(collect);
+        List<ProductCategory> productCategories = categoryService.findByCategoryTypeIn(collect);
 
         List<ProductVO> productVOList = new ArrayList<>();
 
@@ -45,6 +46,8 @@ public class BuyerProductController
         for(ProductCategory category:productCategories)
         {
             ProductVO productVO = new ProductVO();
+
+            /**类目表提供类目的种类和名字*/
             productVO.setCategoryType(category.getCategoryType());
             productVO.setCategoryName(category.getCategoryName());
 
