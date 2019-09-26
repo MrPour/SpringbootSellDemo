@@ -16,7 +16,7 @@ public interface IOrderService
     OrderDTO finish(OrderDTO orderDTO);
 
     /**支付订单*/
-    OrderDTO pay(OrderDTO orderDTO);
+    OrderDTO paid(OrderDTO orderDTO);
 
     /**查询单个订单,查询订单并显示出对应的订单详情*/
     OrderDTO findByOrderId(String orderId);

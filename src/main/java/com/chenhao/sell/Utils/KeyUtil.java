@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class KeyUtil
 {
-    public static String createKey()
+    //并发条件下可能重号
+    public synchronized static String createKey()
     {
         Random random = new Random();
         /**生成六位随机数*/

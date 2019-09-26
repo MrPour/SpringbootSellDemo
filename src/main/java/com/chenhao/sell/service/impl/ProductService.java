@@ -46,19 +46,22 @@ public class ProductService implements IProductService
     }
 
     @Override
+    @Transactional
     public void increaseStock(List<CartDTO> cartDTOList)
     {
         for (CartDTO cartDTO : cartDTOList)
         {
             Optional<ProductInfo> byId = repository.findById(cartDTO.getProductId());
             ProductInfo productInfo = byId.get();
+
             if(null == productInfo)
             {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXISTS);
             }
-            Integer result = productInfo.getProductStock() + cartDTO.getProductQuantity();
 
+            Integer result = productInfo.getProductStock() + cartDTO.getProductQuantity();
             productInfo.setProductStock(result);
+
             repository.save(productInfo);
         }
 
@@ -86,6 +89,7 @@ public class ProductService implements IProductService
             }
 
             productInfo.setProductStock(result);
+
             repository.save(productInfo);
         }
 

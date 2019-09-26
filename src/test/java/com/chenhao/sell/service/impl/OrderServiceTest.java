@@ -54,15 +54,27 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void cancel() {
+    public void cancel()
+    {
+        OrderDTO orderDTO = orderService.findByOrderId("1569065017066342547");
+        OrderDTO result = orderService.cancel(orderDTO);
+        Assert.assertEquals(PayStatusEnum.WAIT.getCode(),result.getPayStatus());
     }
 
     @Test
-    public void finish() {
+    public void finish()
+    {
+        OrderDTO orderDTO = orderService.findByOrderId("1569064910892288300");
+        OrderDTO result = orderService.finish(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(),result.getOrderStatus());
     }
 
     @Test
-    public void pay() {
+    public void paid()
+    {
+        OrderDTO orderDTO = orderService.findByOrderId("1569063676808480477");
+        OrderDTO result = orderService.paid(orderDTO);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(),result.getPayStatus());
     }
 
     @Test
