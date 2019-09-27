@@ -52,6 +52,8 @@ public class OrderService implements IOrderService
         BigDecimal orderSum = new BigDecimal(BigInteger.ZERO);
         //生成订单id
         String orderId = KeyUtil.createKey();
+        //回写给orderDTO
+        orderDTO.setOrderId(orderId);
 
         /**  1、去数据库查询订单详情中对应的商品信息*/
         for(OrderDetail orderDetail:orderDTO.getOrderDetails())
@@ -79,8 +81,9 @@ public class OrderService implements IOrderService
         //这里的顺序要注意，根据Test出错，他会把null值复制过去，从而覆盖前面确定的值。
         // 因此顺序是转换放最前面！！！
         OrderMaster orderMaster = OrderDTO2OrderMasterConverter.convert(orderDTO);
-        orderMaster.setOrderId(orderId);
         orderMaster.setOrderAmount(orderSum);
+        orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
+        orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
 
         masterRepository.save(orderMaster);
 

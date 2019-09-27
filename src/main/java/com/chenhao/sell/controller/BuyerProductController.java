@@ -29,7 +29,7 @@ public class BuyerProductController
     private CategoryService categoryService;
 
     @GetMapping("/list")
-    public ResultVO findUpAll()
+    public ResultVO<List<ProductVO>> findUpAll()
     {
         /**这里是一次性查出，而不是单独按照type去查找，效率更高*/
         List<ProductInfo> productInfos = productService.findUpAll();

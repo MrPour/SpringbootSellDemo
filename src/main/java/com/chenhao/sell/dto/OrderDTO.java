@@ -1,7 +1,9 @@
 package com.chenhao.sell.dto;
 
 
+import com.chenhao.sell.Utils.serializer.Date2LongSerializer;
 import com.chenhao.sell.dataObject.OrderDetail;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -35,8 +37,10 @@ public class OrderDTO
 
     private Integer payStatus;
 
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
 
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
     /**新增订单详情列表*/
