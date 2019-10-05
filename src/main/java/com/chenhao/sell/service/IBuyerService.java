@@ -10,5 +10,4 @@ public interface IBuyerService
 
     /**根据买家的openid取消单个订单*/
     OrderDTO cancelOrder(String openid,String orderId);
-
 }

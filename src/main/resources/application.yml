@@ -19,3 +19,6 @@ server:
 ## path: C:\Users\Mr.Pour\Desktop
 #  path: /var/log/tomcat/
 #  level: debug
+wechat:
+  mpAppId: wx45eba76af086fdc5
+  mpAppSecret: c3559f39fdb32617f97b54c483e5333b
