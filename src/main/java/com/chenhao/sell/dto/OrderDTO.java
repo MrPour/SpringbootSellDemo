@@ -31,6 +31,7 @@ public class OrderDTO
 
     private String buyerOpenid;
 
+    /**注意转doubleValue*/
     private BigDecimal orderAmount;
 
     private Integer orderStatus;

@@ -22,3 +22,12 @@ server:
 wechat:
   mpAppId: wx45eba76af086fdc5
   mpAppSecret: c3559f39fdb32617f97b54c483e5333b
+#  mpAppId: wxd898fcb01713c658
+#  mpAppSecret: 29d8a650db31472aa87800e3b0d739f2
+#  openAppId: x6ad144e54af67d87
+#  openAppSecret: 91a2dd6s38a2bbccfb7e9
+  mchId: 1409146202
+  mchKey: c976503d34ca432c601361f969fd8d85
+  keyPath: /var/weixin_cert/h5.p12
+  notifyUrl: http://mrpour.natapp1.cc/sell/pay/notify #异步通知地址
+
