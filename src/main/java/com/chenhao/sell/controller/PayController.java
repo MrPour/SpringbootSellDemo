@@ -8,9 +8,7 @@ import com.chenhao.sell.service.impl.PayService;
 import com.lly835.bestpay.model.PayResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
@@ -25,6 +23,8 @@ public class PayController
     @Autowired
     private PayService payService;
 
+    /**支付订单*/
+
     @GetMapping("/create")
     public ModelAndView create(@RequestParam("orderId") String orderId,
                                @RequestParam("returnUrl") String returnUrl,
@@ -38,15 +38,24 @@ public class PayController
         }
         /**支付*/
         PayResponse payResponse = payService.create(orderDTO);
-//        PayResponse payResponse = new PayResponse();
-//        payResponse.setAppId("12345");
-//        payResponse.setOrderAmount(123.0);
-          map.put("payResponse",payResponse);
-          //支付后跳转
-          map.put("returnUrl",returnUrl);
+        map.put("payResponse",payResponse);
+        //【FreeMarker】支付后的页面数据通过freemarker渲染，跳转地址通过freemarker跳转
+        map.put("returnUrl",returnUrl);
         /**配置freemarker模板地址*/
-//        return new ModelAndView("test",map);
-          return new ModelAndView("create",map);
-
+//      return new ModelAndView("test",map);
+        return new ModelAndView("createPay",map);
     }
+
+    /**接收微信的异步通知(微信调用该接口)*/
+
+    @PostMapping("/notify")
+    public ModelAndView notify(@RequestBody String notifyData)
+    {
+        payService.notify(notifyData);
+        /**告诉微信已经订单支付成功*/
+        //【微信通知机制】1、异步调用是不停的进行，所以必须要按照格式回传给微信结果
+        //              2、使用freemarker的形式传递比String更美观
+        return new ModelAndView("success");
+    }
+
 }

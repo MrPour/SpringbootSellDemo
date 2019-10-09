@@ -7,4 +7,7 @@ public interface IPayService
 {
     /**根据订单信息进行支付*/
     public PayResponse create(OrderDTO orderDTO);
+
+    /**向前端通知支付结果*/
+    public PayResponse notify(String notifyData);
 }

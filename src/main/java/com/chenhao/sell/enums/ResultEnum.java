@@ -16,7 +16,8 @@ public enum ResultEnum
     PAY_STATUS_ERROR(17,"支付状态不正确"),
     CART_EMPTY_ERROR(18,"购物车为空"),
     ORDER_OWNER_ERROR(19,"该订单不属于当前用户"),
-    WX_MP_ERROR(20,"微信公众账号错误");
+    WX_MP_ERROR(20,"微信公众账号错误"),
+    WX_PAY_NOTIFY_MONEY_VERIFY_ERROR(21,"微信支付异步通知金额校验不通过");
     private Integer code;
 
     private String msg;
