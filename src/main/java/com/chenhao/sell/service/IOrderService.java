@@ -24,6 +24,8 @@ public interface IOrderService
     /**查询订单列表，但不展示订单详情（因为要展示，所以使用Page）*/
     Page<OrderDTO> findByOpenId(String buyerOpenId, Pageable pageable);
 
+    /**查询所有的订单列表*/
+    Page<OrderDTO> findList(Pageable pageable);
 
 
 

@@ -42,9 +42,9 @@ public class PayController
         //【FreeMarker】支付后的页面数据通过freemarker渲染，跳转地址通过freemarker跳转
         map.put("returnUrl",returnUrl);
         /**配置freemarker模板地址*/
-//      return new ModelAndView("test",map);
         return new ModelAndView("createPay",map);
     }
+
 
     /**接收微信的异步通知(微信调用该接口)*/
 

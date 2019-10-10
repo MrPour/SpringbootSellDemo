@@ -93,4 +93,15 @@ public class OrderServiceTest {
         logger.info("【查询个人所有订单结果】total={}",orderDTOPage.getTotalElements());
         Assert.assertEquals(2,orderDTOPage.getTotalElements());
     }
+
+    @Test
+    public void findList()
+    {
+        PageRequest pageRequest = PageRequest.of(0, 5);
+        Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
+        logger.info("【查询所有订单结果】total={}",orderDTOPage.getTotalElements());
+        Assert.assertNotEquals(0,orderDTOPage.getTotalElements());
+
+
+    }
 }

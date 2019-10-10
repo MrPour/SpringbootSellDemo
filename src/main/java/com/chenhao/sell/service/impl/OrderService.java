@@ -44,6 +44,9 @@ public class OrderService implements IOrderService
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private PayService payService;
+
     @Override
     @Transactional
     public OrderDTO create(OrderDTO orderDTO)
@@ -139,7 +142,7 @@ public class OrderService implements IOrderService
         /**4、如果已支付，还要退款*/
         if(PayStatusEnum.SUCCESS.getCode().equals(orderDTO.getPayStatus()))
         {
-            //TODO
+            payService.refund(orderDTO);
         }
         return orderDTO;
     }
@@ -232,4 +235,16 @@ public class OrderService implements IOrderService
 
         return orderDTOPage;
     }
+
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = masterRepository.findAll(pageable);
+        List<OrderMaster> orderMasterList = orderMasterPage.getContent();
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convertList(orderMasterList);
+        //重新装配Page对象（list、分页信息和总记录数）
+        Page<OrderDTO> orderDTOPage = new PageImpl<OrderDTO>(orderDTOList,pageable,orderMasterPage.getTotalElements());
+        return orderDTOPage;
+    }
+
+
 }

@@ -25,4 +25,11 @@ public class PayServiceTest {
         OrderDTO orderDTO = orderService.findByOrderId("1569576751220182235");
         payService.create(orderDTO);
     }
+
+    @Test
+    public void refund()
+    {
+        OrderDTO orderDTO = orderService.findByOrderId("1569063676808480477");
+        payService.refund(orderDTO);
+    }
 }

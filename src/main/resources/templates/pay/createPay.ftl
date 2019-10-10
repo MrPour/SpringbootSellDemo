@@ -1,6 +1,6 @@
 <script>
     function onBridgeReady(){
-        /**以下数据皆由后台下单时生成*/
+        /**以下数据皆由后台支付时生成*/
         WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
                     "appId":"${payResponse.appId}",     //公众号名称，由商户传入

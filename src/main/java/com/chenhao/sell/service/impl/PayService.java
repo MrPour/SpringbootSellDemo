@@ -9,12 +9,12 @@ import com.chenhao.sell.service.IPayService;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
+import com.lly835.bestpay.model.RefundRequest;
+import com.lly835.bestpay.model.RefundResponse;
 import com.lly835.bestpay.service.impl.BestPayServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 @Service
 @Slf4j
@@ -78,6 +78,22 @@ public class PayService implements IPayService
         orderService.paid(orderDTO);
 
         return payResponse;
+    }
+
+    @Override
+    public RefundResponse refund(OrderDTO orderDTO)
+    {
+        //【退款系统】真实的企业案例需要一个退款系统不停的对账
+        RefundRequest refundRequest = new RefundRequest();
+        refundRequest.setOrderId(orderDTO.getOrderId());
+        refundRequest.setOrderAmount(orderDTO.getOrderAmount().doubleValue());
+        refundRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
+        log.info("【微信退款】refundRequest={}",JsonUtil.toJson(refundRequest));
+
+        RefundResponse refundResponse = bestPayService.refund(refundRequest);
+        log.info("【微信退款】refundResponse={}",JsonUtil.toJson(refundResponse));
+
+        return refundResponse;
     }
 
 }
