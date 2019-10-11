@@ -100,7 +100,7 @@ public class OrderServiceTest {
         PageRequest pageRequest = PageRequest.of(0, 5);
         Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
         logger.info("【查询所有订单结果】total={}",orderDTOPage.getTotalElements());
-        Assert.assertNotEquals(0,orderDTOPage.getTotalElements());
+        Assert.assertTrue("查询所有订单结果",orderDTOPage.getTotalElements()>0);
 
 
     }

@@ -25,7 +25,7 @@ public class PayController
 
     /**支付订单*/
 
-    @GetMapping("/create")
+    @GetMapping("/realCreate")
     public ModelAndView create(@RequestParam("orderId") String orderId,
                                @RequestParam("returnUrl") String returnUrl,
                                Map<String,Object> map)
@@ -42,7 +42,7 @@ public class PayController
         //【FreeMarker】支付后的页面数据通过freemarker渲染，跳转地址通过freemarker跳转
         map.put("returnUrl",returnUrl);
         /**配置freemarker模板地址*/
-        return new ModelAndView("createPay",map);
+        return new ModelAndView("pay/createPay",map);
     }
 
 
@@ -53,9 +53,23 @@ public class PayController
     {
         payService.notify(notifyData);
         /**告诉微信已经订单支付成功*/
-        //【微信通知机制】1、异步调用是不停的进行，所以必须要按照格式回传给微信结果
+        //【微信通知机制】1、异步调用是不停的进行，所以必d须要按照格式回传给微信结果
         //              2、使用freemarker的形式传递比String更美观
-        return new ModelAndView("success");
+        return new ModelAndView("pay/success");
     }
 
+    /**【测试】：由于没有商户号，所以跳过支付过程进行处理*/
+    @GetMapping("/create")
+    public String createTest(@RequestParam("orderId") String orderId,
+                                   @RequestParam("returnUrl") String returnUrl)
+    {
+        /**查询订单是否存在*/
+        OrderDTO orderDTO = orderService.findByOrderId(orderId);
+        if(null==orderDTO)
+        {
+            throw new SellException(ResultEnum.ORDER_NOT_EXISTS);
+        }
+
+        return "redirect:"+returnUrl;
+    }
 }

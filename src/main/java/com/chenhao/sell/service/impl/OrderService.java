@@ -205,11 +205,19 @@ public class OrderService implements IOrderService
     {
         OrderDTO orderDTO = new OrderDTO();
         Optional<OrderMaster> byId = masterRepository.findById(orderId);
-        OrderMaster orderMaster = byId.get();
 
-        if(null == orderMaster)
+        //【Optional】这里要注意，已经帮我们处理了值为null的情况，会抛出异常，因此需要自己再抛出我们自己的异常。
+        OrderMaster orderMaster = null;
+        try
         {
-            throw new SellException(ResultEnum.ORDER_NOT_EXISTS);
+            orderMaster = byId.get();
+        }
+        catch (Exception e)
+        {
+            if ("No value present".equals(e.getMessage()))
+            {
+                throw new SellException(ResultEnum.ORDER_NOT_EXISTS);
+            }
         }
 
         List<OrderDetail> orderDetailList = detailRepository.findByOrderId(orderId);

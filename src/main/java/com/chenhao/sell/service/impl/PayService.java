@@ -46,6 +46,12 @@ public class PayService implements IPayService
         return payResponse;
     }
 
+    /**省略支付过程，修改订单状态*/
+    @Override
+    public void createTest(OrderDTO orderDTO) {
+        orderService.paid(orderDTO);
+    }
+
     @Override
     public PayResponse notify(String notifyData)
     {

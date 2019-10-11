@@ -1,10 +1,16 @@
 package com.chenhao.sell.dto;
 
 
+import com.chenhao.sell.Utils.EnumUtil;
 import com.chenhao.sell.Utils.serializer.Date2LongSerializer;
 import com.chenhao.sell.dataObject.OrderDetail;
+import com.chenhao.sell.enums.OrderStatusEnum;
+import com.chenhao.sell.enums.PayStatusEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
+import org.aspectj.weaver.ast.Or;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +44,7 @@ public class OrderDTO
 
     private Integer payStatus;
 
-    @JsonSerialize(using = Date2LongSerializer.class)
+    @JsonSerialize(using = Date2LongSerializer.class) //【数据转化】回传给前端时的格式整理
     private Date createTime;
 
     @JsonSerialize(using = Date2LongSerializer.class)
@@ -46,4 +52,17 @@ public class OrderDTO
 
     /**新增订单详情列表*/
     private List<OrderDetail> orderDetails;
+
+    @JsonIgnore //【数据转化】接口返回时，会忽略掉这个字段
+    public OrderStatusEnum getOrderStatusEnum()
+    {
+        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
+    }
+
+    @JsonIgnore //【FreeMarker】这里必须写成public，否则模板里不能调用
+    public PayStatusEnum getPayStatusEnum()
+    {
+        return EnumUtil.getByCode(payStatus,PayStatusEnum.class);
+    }
+
 }
