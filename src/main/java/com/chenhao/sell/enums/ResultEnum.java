@@ -19,7 +19,9 @@ public enum ResultEnum
     ORDER_OWNER_ERROR(19,"该订单不属于当前用户"),
     WX_MP_ERROR(20,"微信公众账号错误"),
     WX_PAY_NOTIFY_MONEY_VERIFY_ERROR(21,"微信支付异步通知金额校验不通过"),
-    ORDER_STATUS_CANCEL_SUCCESS(22,"订单取消成功！");
+    ORDER_STATUS_CANCEL_SUCCESS(22,"订单取消成功！"),
+    PRODUCT_STATUS_ERROR(23,"商品状态不正确");
+
     private Integer code;
 
     private String msg;

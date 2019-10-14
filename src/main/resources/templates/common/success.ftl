@@ -12,7 +12,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h4>
                     成功!
-                </h4> <strong>${successMsg}，即将在3s内跳转回订单面板... <a href="/sell/seller/order/list" class="alert-link">或点击此处</a>
+                </h4> <strong>${successMsg}，即将在3s内跳转回订单面板... <a href="${returnUrl}" class="alert-link">或点击此处</a>
             </div>
         </div>
     </div>

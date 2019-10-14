@@ -24,7 +24,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/seller/order")
 @Slf4j
-public class SellerController
+public class SellerOrderController
 {
     @Autowired
     private OrderService orderService;
@@ -80,6 +80,39 @@ public class SellerController
         map.put("returnUrl","/sell/seller/order/list?page="+page);
         return new ModelAndView("common/success",map);
     }
+
+    /**
+     * @title 卖家完结订单
+     * @param orderId 订单号
+     * @param page 当前页
+     * @author Chenhao
+     * @date 2019/10/12
+     */
+    @GetMapping("/finish")
+    public ModelAndView finish(@RequestParam(value = "orderId") String orderId,
+                               @RequestParam(value = "page") Integer page,
+                               Map<String,Object> map)
+    {
+        OrderDTO orderDTO = null;
+        //订单完结异常的情况
+        try
+        {
+            orderDTO = orderService.findByOrderId(orderId);
+            orderService.finish(orderDTO);
+        }
+        catch (SellException e)
+        {
+            log.info("【卖家完结订单】订单完结失败，orderId={}",orderId);
+            map.put("errorMsg", e.getMessage());
+            map.put("returnUrl","/sell/seller/order/list?page="+page);
+            return new ModelAndView("common/error",map);
+        }
+
+        map.put("successMsg",ResultEnum.SUCCESS.getMsg());
+        map.put(" ","/sell/seller/order/list?page="+page);
+        return new ModelAndView("common/success",map);
+    }
+
 
     /**
     * @title 卖家查询订单详情

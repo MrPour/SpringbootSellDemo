@@ -61,4 +61,18 @@ public class ProductServiceTest {
         ProductInfo info = service.save(productInfo);
         Assert.assertNotNull(info);
     }
+
+    @Test
+    public void offSale()
+    {
+        ProductInfo productInfo = service.offSale("12345");
+        Assert.assertEquals(ProductStatusEnum.DOWN.getCode(),productInfo.getProductStatus());
+    }
+
+    @Test
+    public void onSale()
+    {
+        ProductInfo productInfo = service.onSale("12345");
+        Assert.assertEquals(ProductStatusEnum.UP.getCode(),productInfo.getProductStatus());
+    }
 }

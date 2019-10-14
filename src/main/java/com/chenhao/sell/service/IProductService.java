@@ -21,6 +21,12 @@ public interface IProductService
     /**新增商品信息*/
     ProductInfo save(ProductInfo productInfo);
 
+    /**上架商品*/
+    ProductInfo onSale(String orderId);
+
+    /**下架商品*/
+    ProductInfo offSale(String orderId);
+
     /**为一批商品加库存*/
     //按订单去批量加减效率更高
     void increaseStock(List<CartDTO> cartDTOList);

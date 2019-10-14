@@ -204,13 +204,12 @@ public class OrderService implements IOrderService
     public OrderDTO findByOrderId(String orderId)
     {
         OrderDTO orderDTO = new OrderDTO();
-        Optional<OrderMaster> byId = masterRepository.findById(orderId);
 
         //【Optional】这里要注意，已经帮我们处理了值为null的情况，会抛出异常，因此需要自己再抛出我们自己的异常。
         OrderMaster orderMaster = null;
         try
         {
-            orderMaster = byId.get();
+            orderMaster = masterRepository.findById(orderId).get();
         }
         catch (Exception e)
         {

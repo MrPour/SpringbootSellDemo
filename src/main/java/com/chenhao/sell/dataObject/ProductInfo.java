@@ -1,5 +1,8 @@
 package com.chenhao.sell.dataObject;
 
+import com.chenhao.sell.Utils.EnumUtil;
+import com.chenhao.sell.enums.ProductStatusEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -34,4 +37,10 @@ public class ProductInfo
     private Date createTime;
 
     private Date updateTime;
+
+    @JsonIgnore
+    public ProductStatusEnum getProductStatusEnum()
+    {
+        return EnumUtil.getByCode(productStatus,ProductStatusEnum.class);
+    }
 }

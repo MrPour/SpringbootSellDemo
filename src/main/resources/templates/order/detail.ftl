@@ -1,11 +1,12 @@
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>买家订单列表</title>
-    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">">
-</head>
-<body>
-<div class="container">
+<#include "../common/header.ftl">
+ <body>
+  <div id="wrapper" class="toggled">
+    <#--sidebar-->
+    <#include "../common/nav.ftl">
+    <#--content-->
+    <div id="page-content-wrapper">
+        <div class="container">
     <div class="row clearfix">
         <#--上面部分--订单信息-->
         <div class="col-md-4 column">
@@ -81,12 +82,13 @@
             <#--操作界面-->
         <div>
             <#if orderDTO.orderStatus==0>
-            <a href="/sell/seller/order/finish?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-primary">完结订单</a>
+            <a href="/sell/seller/order/finish?orderId=${orderDTO.orderId}&page=${currentPage}" type="button" class="btn btn-default btn-primary">完结订单</a>
                 <a href="/sell/seller/order/cancel?orderId=${orderDTO.orderId}&page=${currentPage}" type="button" class="btn btn-default btn-danger">取消订单</button></a>
             </#if>
         </div>
     </div>
 </div>
-
-</body>
+    </div>
+  </div>
+ </body>
 </html>

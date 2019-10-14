@@ -25,7 +25,19 @@ public class ProductService implements IProductService
     @Override
     public ProductInfo findById(String id)
     {
-        return repository.findById(id).get();
+        ProductInfo productInfo = null;
+        try
+        {
+            productInfo = repository.findById(id).get();
+        }
+        catch (Exception e)
+        {
+            if ("No value present".equals(e.getMessage()))
+            {
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXISTS);
+            }
+        }
+        return productInfo;
     }
 
     @Override
@@ -43,6 +55,36 @@ public class ProductService implements IProductService
     @Override
     public ProductInfo save(ProductInfo productInfo) {
         return repository.save(productInfo);
+    }
+
+    @Override
+    public ProductInfo onSale(String orderId)
+    {
+        ProductInfo productInfo = findById(orderId);
+        if(ProductStatusEnum.UP.getCode() == productInfo.getProductStatus())
+        {
+            //虽然前端不会显示上架商品的这个选项，但是后端逻辑要完整，需要报错
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
+        //完成数据库更新
+        repository.save(productInfo);
+        return productInfo;
+    }
+
+    @Override
+    public ProductInfo offSale(String orderId)
+    {
+        ProductInfo productInfo = findById(orderId);
+        if(ProductStatusEnum.DOWN.getCode() == productInfo.getProductStatus())
+        {
+            //虽然前端不会显示上架商品的这个选项，但是后端逻辑要完整，需要报错
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        //完成数据库更新
+        repository.save(productInfo);
+        return productInfo;
     }
 
     @Override

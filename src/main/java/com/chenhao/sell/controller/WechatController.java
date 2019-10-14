@@ -28,7 +28,7 @@ public class WechatController
     {
         /**设置授权的回调url*/
         String url = "http://mrpour.natapp1.cc/sell/wechat/userInfo";
-        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_BASE, URLEncoder.encode(returnUrl));
+        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl));
         log.info("微信获取授权地址后获取code，生成的重定向地址redirectUrl={}",redirectUrl);
         return "redirect:"+redirectUrl; //重定向到生成的这个地址,使用Controller注解
     }
