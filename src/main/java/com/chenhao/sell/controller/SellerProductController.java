@@ -1,5 +1,6 @@
 package com.chenhao.sell.controller;
 
+import com.chenhao.sell.Utils.KeyUtil;
 import com.chenhao.sell.dataObject.ProductCategory;
 import com.chenhao.sell.dataObject.ProductInfo;
 import com.chenhao.sell.enums.ResultEnum;
@@ -152,10 +153,24 @@ public class SellerProductController
             return new ModelAndView("/common/error",map);
         }
         /**没有出错则存入*/
+
         try
         {
-            ProductInfo productInfo = productService.findById(productForm.getProductId());
-            BeanUtils.copyProperties(productForm,productInfo);
+            //缺状态，附上默认状态为上架
+            ProductInfo productInfo = new ProductInfo();
+            //不为空说明是修改
+            if(!StringUtils.isEmpty(productForm.getProductId()))
+            {
+                //缺真实状态,从数据库拿到状态,替代默认值
+                productInfo = productService.findById(productForm.getProductId());
+            }
+            else
+            {
+                //为空，说明是新增
+                //缺ID
+                productForm.setProductId(KeyUtil.createKey());
+            }
+            BeanUtils.copyProperties(productForm, productInfo);
             productService.save(productInfo);
         }
         catch (SellException e)

@@ -30,7 +30,7 @@ public class ProductInfo
     /** 商品小图 */
     private String productIcon;
     /** 上架信息 */
-    private Integer productStatus;
+    private Integer productStatus = ProductStatusEnum.UP.getCode();
     /** 类目信息 */
     private Integer categoryType;
 

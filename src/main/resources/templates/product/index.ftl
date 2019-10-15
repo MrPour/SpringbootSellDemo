@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group">
                             <label>商品图片</label>
-                            <img src="${(productInfo.productIcon)!''}" height="250" width="350">
+                            <img src="${(productInfo.productIcon)!''}" alt="等待上传" height="250" width="350">
                             <input name="productIcon" type="text" class="form-control" value="${(productInfo.productIcon)!''}"  />
                         </div>
                         <div class="form-group">
@@ -47,7 +47,7 @@
                             </select>
                         </div>
                         <#--传递隐藏字段id-->
-                        <div class="form-group"><input hidden name="productId" type="text" value="${productInfo.productId}"></div>
+                        <div class="form-group"><input hidden name="productId" type="text" value="${(productInfo.productId)!''}"></div>
                        <div>
                            <button type="submit" class="btn btn-default">提交修改</button>
                        </div>
